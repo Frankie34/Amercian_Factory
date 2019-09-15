@@ -5,11 +5,11 @@ export default function getData () {
     dataset: {
       // Provide data.
       source: [
-        ['Product', '2015', '2016', '2017'],
-        ['Matcha Latte', ...randomize()],
-        ['Milk Tea', ...randomize()],
-        ['Cheese Cocoa', ...randomize()],
-        ['Walnut Brownie', ...randomize()]
+        ['Product', 'Morning Shift', 'Night Shift', 'Normal'],
+        ['Washing', ...randomize()],
+        ['Merge', ...randomize()],
+        ['Heating', ...randomize()],
+        ['Steam Pressure', ...randomize()]
       ]
     },
     // Declare X axis, which is a category axis, mapping

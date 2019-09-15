@@ -13,26 +13,24 @@
           <span>Navigator One</span>
         </template>
         <el-menu-item-group title="Manufacture">
-          <el-menu-item index="1-1" @click="ManuView = !ManuView">item one</el-menu-item>
-          <el-menu-item index="1-2">item one</el-menu-item>
+          <el-menu-item index="1-1" @click="ManuView = !ManuView">Working Process</el-menu-item>
+          <el-menu-item index="1-2" @click="showAll = true" >Finish Work</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="Insurer">
-          <el-menu-item index="1-3" @click="InsuView = !InsuView">item one</el-menu-item>
-          <el-menu-item index="1-4">item one</el-menu-item>
+          <el-menu-item index="1-3" @click="InsuView = !InsuView">Disability identification</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="Regulator">
-          <el-menu-item index="1-5" @click="ReguView = !ReguView">item one</el-menu-item>
-          <el-menu-item index="1-6">item one</el-menu-item>
+          <el-menu-item index="1-5" @click="ReguView = !ReguView">Admin Portal</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="Worker">
-          <el-menu-item index="1-7">item one</el-menu-item>
-          <el-menu-item index="1-8">item one</el-menu-item>
+          <el-menu-item index="1-7" @click="WorkerView = !WorkerView">Recieve Payment</el-menu-item>
         </el-menu-item-group>
         </el-submenu>
     </el-menu>
   </el-col>
   <el-container class="mainBox">
-    <el-header>Dashboard</el-header>
+    <el-header> </el-header>
+    <img src="../assets/money.jpg"  alt="payment"  v-if="WorkerView"/>
     <el-container class="contentBox" v-if="ManuView">
       <el-steps :active="active" align-center class="topBox">
         <el-step title="Step 1" description="Washing"></el-step>
@@ -40,61 +38,61 @@
         <el-step title="Step 3" description="Heating"></el-step>
         <el-step title="Step 4" description="Steam Pressure"></el-step>
       </el-steps>
-      <el-button @click="next"> Go </el-button>
+      <el-button @click="showAll = false;next()"> Go </el-button>
     </el-container>
     <el-container class="sideBox" v-if="InsuView">
       <el-timeline class="block">
-        <el-timeline-item timestamp="2018/4/12" placement="top">
+        <el-timeline-item timestamp="2019/9/12" placement="top" v-if="showAll || active > 3">
           <el-card>
             <h4>Process Update: "Steam Pressure"</h4>
             <p> * Tom Get Injured *</p>
-            <p>Sean committed 2018/4/12 20:46</p>
+            <p>Sean committed 2019/9/12 20:46</p>
           </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/3" placement="top">
+        <el-timeline-item timestamp="2019/9/3" placement="top" v-if="showAll || active > 2">
           <el-card>
             <h4>Process Update: "Heating"</h4>
-            <p>Tom committed 2018/4/3 20:46</p>
+            <p>Tom committed 2019/9/3 20:46</p>
           </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
+        <el-timeline-item timestamp="2019/9/2" placement="top" v-if="showAll || active > 1">
           <el-card>
             <h4>Process Update: "Merge"</h4>
-            <p>Tom committed 2018/4/2 20:46</p>
+            <p>Tom committed 2019/9/2 20:46</p>
           </el-card>
         </el-timeline-item>
-         <el-timeline-item timestamp="2018/4/1" placement="top">
+         <el-timeline-item timestamp="2019/9/1" placement="top" v-if="showAll || active > 0">
           <el-card>
             <h4>Process Update: "Washing"</h4>
-            <p>Tom committed 2018/4/2 20:46</p>
+            <p>Tom committed 2019/9/2 20:46</p>
           </el-card>
         </el-timeline-item>
       </el-timeline>
       <el-timeline class="block">
-        <el-timeline-item timestamp="2018/4/12" placement="top">
+        <el-timeline-item timestamp="2019/9/12" placement="top" v-if="showAll || active > 3">
           <el-card>
             <h4>Block Update: "Injured Commit."</h4>
-            <p> Payment Process Start</p>
             <p> * Tom Get Injured *</p>
-            <p>Sean committed 2018/4/12 20:46</p>
+            <p> Payment Process Start</p>
+            <p>Sean committed 2019/9/12 20:46</p>
           </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/3" placement="top">
+        <el-timeline-item timestamp="2019/9/3" placement="top" v-if="showAll || active > 2">
           <el-card>
             <h4>Block Update: "Heating Done"</h4>
-            <p>Tom committed 2018/4/3 20:46</p>
+            <p>Tom committed 2019/9/3 20:46</p>
           </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
+        <el-timeline-item timestamp="2019/9/2" placement="top" v-if="showAll || active > 1">
           <el-card>
             <h4>Block Update: "Merge Done"</h4>
-            <p>Tom committed 2018/4/2 20:46</p>
+            <p>Tom committed 2019/9/2 20:46</p>
           </el-card>
         </el-timeline-item>
-         <el-timeline-item timestamp="2018/4/1" placement="top">
+         <el-timeline-item timestamp="2019/9/1" placement="top" v-if="showAll || active > 0">
           <el-card>
             <h4>Block Update: "Washing Done"</h4>
-            <p>Tom committed 2018/4/2 20:46</p>
+            <p>Tom committed 2019/9/2 20:46</p>
           </el-card>
         </el-timeline-item>
       </el-timeline>
@@ -125,29 +123,32 @@
   </el-container>
     <el-container>
     <el-header></el-header>
+    <el-header class="stageTitle" v-if="ManuView">Quality Control</el-header>
+    <el-header class="stageTitle" v-if="ReguView">Efficiency & More Data</el-header>
+    <el-header class="stageTitle" v-if="InsuView">Insurance Process</el-header>
     <el-timeline v-if="ManuView" class="topBox">
-        <el-timeline-item timestamp="2018/4/12" placement="top">
+        <el-timeline-item timestamp="2019/9/12" placement="top" v-if="showAll || active > 3">
           <el-card>
             <h4>Process Update: "Steam Pressure"</h4>
-            <p>Tom committed 2018/4/12 20:46</p>
+            <p>Tom committed 2019/9/12 20:46</p>
           </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/3" placement="top">
+        <el-timeline-item timestamp="2019/9/3" placement="top" v-if="showAll || active > 2">
           <el-card>
             <h4>Process Update: "Heating"</h4>
-            <p>Tom committed 2018/4/3 20:46</p>
+            <p>Tom committed 2019/9/3 20:46</p>
           </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
+        <el-timeline-item timestamp="2019/9/2" placement="top" v-if="showAll || active > 1">
           <el-card>
             <h4>Process Update: "Merge"</h4>
-            <p>Tom committed 2018/4/2 20:46</p>
+            <p>Tom committed 2019/9/2 20:46</p>
           </el-card>
         </el-timeline-item>
-         <el-timeline-item timestamp="2018/4/1" placement="top">
+         <el-timeline-item timestamp="2019/9/1" placement="top" v-if="showAll || active > 0">
           <el-card>
             <h4>Process Update: "Washing"</h4>
-            <p>Tom committed 2018/4/2 20:46</p>
+            <p>Tom committed 2019/9/2 20:46</p>
           </el-card>
         </el-timeline-item>
       </el-timeline>
@@ -236,6 +237,8 @@ export default {
         data.push([r, i])
     }
       return {
+          cnt:0,
+          showAll: true,
           active:1,
           pie,
           map,
@@ -244,22 +247,23 @@ export default {
           ManuView: false,
           InsuView: false,
           ReguView: false,
+          WorkerView: false,
           bar: getBar(),
           scores: [
-            { name: '进攻', max: 20, value: 19 },
-            { name: '防守', max: 20, value: 9 },
-            { name: '速度', max: 20, value: 18 },
-            { name: '力量', max: 20, value: 16 },
-            { name: '耐力', max: 20, value: 16 },
-            { name: '敏捷', max: 20, value: 20 }
-          ],
+      { name: 'Washing Worker', max: 20, value: 19 },
+      { name: 'Superviser', max: 20, value: 9 },
+      { name: 'Heating Worker', max: 20, value: 18 },
+      { name: 'Steaming Pressure Worker', max: 20, value: 16 },
+      { name: 'SDE', max: 20, value: 16 },
+      { name: 'SDE II', max: 20, value: 20 }
+    ],
       }
   },
   computed : {
     scoreRadar () {
       return {
         title: {
-          text: '能力雷达图'
+          text: 'Human Resource'
         },
         tooltip: {},
         radar: {
@@ -269,7 +273,7 @@ export default {
         },
         series: [
           {
-            name: '能力值',
+            name: 'Labor Counts',
             type: 'radar',
             data: [{ value: this.scores.map(({ value }) => value) }]
           }
@@ -279,7 +283,7 @@ export default {
   },
   methods: {
     next() {
-        if (this.active++ > 4) this.active = 1;
+        if (this.active++ > 4) this.active = 0;
     },
     refresh () {
       // simulating async data from server
@@ -313,6 +317,9 @@ export default {
 </script>
 
 <style>
+.stageTitle {
+  font-size: 30px;
+}
 figure {
   display: inline-block;
   position :relative;
