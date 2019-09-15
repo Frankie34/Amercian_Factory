@@ -1,7 +1,6 @@
 <template>
-    <el-container>
-    <el-aside width="200px">
-       <el-col>
+<el-container>
+  <el-col :span="5" class="aside">
     <h5>Default colors</h5>
     <el-menu
       default-active="2"
@@ -13,50 +12,313 @@
           <i class="el-icon-location"></i>
           <span>Navigator One</span>
         </template>
-        <el-menu-item-group title="Group One">
-          <el-menu-item index="1-1">item one</el-menu-item>
+        <el-menu-item-group title="Manufacture">
+          <el-menu-item index="1-1" @click="ManuView = !ManuView">item one</el-menu-item>
           <el-menu-item index="1-2">item one</el-menu-item>
         </el-menu-item-group>
-        <el-menu-item-group title="Group One">
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item one</el-menu-item>
+        <el-menu-item-group title="Insurer">
+          <el-menu-item index="1-3" @click="InsuView = !InsuView">item one</el-menu-item>
+          <el-menu-item index="1-4">item one</el-menu-item>
         </el-menu-item-group>
-        <el-menu-item-group title="Group One">
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item one</el-menu-item>
+        <el-menu-item-group title="Regulator">
+          <el-menu-item index="1-5" @click="ReguView = !ReguView">item one</el-menu-item>
+          <el-menu-item index="1-6">item one</el-menu-item>
         </el-menu-item-group>
-      </el-submenu>
+        <el-menu-item-group title="Worker">
+          <el-menu-item index="1-7">item one</el-menu-item>
+          <el-menu-item index="1-8">item one</el-menu-item>
+        </el-menu-item-group>
+        </el-submenu>
     </el-menu>
   </el-col>
-    </el-aside>  
-        <el-main>
-            <el-header>Dashboard</el-header>
-            {{msg}}
-        </el-main>
+  <el-container class="mainBox">
+    <el-header>Dashboard</el-header>
+    <el-container class="contentBox" v-if="ManuView">
+      <el-steps :active="2" align-center>
+        <el-step title="Step 1" description="Some description"></el-step>
+        <el-step title="Step 2" description="Some description"></el-step>
+        <el-step title="Step 3" description="Some description"></el-step>
+        <el-step title="Step 4" description="Some description"></el-step>
+      </el-steps>
+      <el-timeline>
+        <el-timeline-item timestamp="2018/4/12" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/12 20:46</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/3" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/3 20:46</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/2" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/2 20:46</p>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
     </el-container>
+    <el-container class="sideBox" v-if="InsuView">
+      <el-timeline class="block">
+        <el-timeline-item timestamp="2018/4/12" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/12 20:46</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/3" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/3 20:46</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/2" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/2 20:46</p>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
+      <el-timeline class="block">
+        <el-timeline-item timestamp="2018/4/12" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/12 20:46</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/3" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/3 20:46</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/2" placement="top">
+          <el-card>
+            <h4>Update Github template</h4>
+            <p>Tom committed 2018/4/2 20:46</p>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
+    </el-container>
+    <el-container class="sideBox" v-if="ReguView">
+      <digi-block class="block" percent="75%"/>
+      <digi-block class="block" percent="50%"/>
+    </el-container>
+    <chart
+          v-if="ReguView"
+          :options="bar"
+          :init-options="initOptions"
+          ref="bar"
+          theme="ovilia-green"
+          autoresize
+        />
+      <chart
+          v-if="ReguView"
+          :options="bar"
+          :init-options="initOptions"
+          ref="bar"
+          theme="dark"
+          autoresize
+        />
+      <p v-if="seconds <= 0"><small>Loaded.</small></p>
+      <p v-else><small>Data coming in <b>{{ seconds }}</b> second{{ seconds > 1 ? 's' : '' }}...</small></p>
+      <p><el-button v-if="ReguView" @click="refresh" :disabled="seconds > 0">Refresh</el-button></p>
+  </el-container>
+    <el-container>
+    <el-header></el-header>
+    <chart
+          class="otherBox"
+          v-if="ReguView"
+          :options="pie"
+          :init-options="initOptions"
+          autoresize
+        />
+      <!-- <chart
+            :options="map"
+            :init-options="initOptions"
+            ref="map"
+            autoresize
+          /> -->
+      <chart
+            v-if="ReguView"
+            :options="scoreRadar"
+            :init-options="initOptions"
+            autoresize
+          />
+      <digi-block class="block" percent="75%" v-if="ReguView"/>
+      <digi-block class="block" percent="50%" v-if="ReguView"/>
+    </el-container>
+</el-container>
 </template>
 
 <script>
+import DigiBlock from './DigiBlock.vue'
+import qs from 'qs'
+import ECharts from './ECharts.vue'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/chart/line'
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/chart/map'
+import 'echarts/lib/chart/radar'
+import 'echarts/lib/chart/scatter'
+import 'echarts/lib/chart/effectScatter'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/polar'
+import 'echarts/lib/component/geo'
+import 'echarts/lib/component/legend'
+import 'echarts/lib/component/title'
+import 'echarts/lib/component/visualMap'
+import 'echarts/lib/component/dataset'
+import 'echarts/map/js/world'
+import 'zrender/lib/svg/svg'
+
+import getBar from './data/bar'
+import pie from './data/pie'
+import polar from './data/polar'
+import scatter from './data/scatter'
+import map from './data/map'
+import { c1, c2 } from './data/connect'
+import store from './store'
+
+// built-in theme
+import 'echarts/theme/dark'
+
+// custom theme
+import theme from './theme.json'
+
+// Map of China
+import chinaMap from './china.json'
+
+// registering map data
+ECharts.registerMap('china', chinaMap)
+
+// registering custom theme
+ECharts.registerTheme('ovilia-green', theme)
+
+
 export default {
   name: 'HomePage',
+  components: {
+    DigiBlock,
+    chart: ECharts
+  },
   data() {
+    let data = []
+
+    for (let i = 0; i <= 360; i++) {
+        let t = i / 180 * Math.PI
+        let r = Math.sin(2 * t) * Math.cos(2 * t)
+        data.push([r, i])
+    }
       return {
+          pie,
+          map,
           msg: 'hello',
+          active: 0,
+          ManuView: false,
+          InsuView: false,
+          ReguView: false,
+          bar: getBar(),
+          scores: [
+            { name: '进攻', max: 20, value: 19 },
+            { name: '防守', max: 20, value: 9 },
+            { name: '速度', max: 20, value: 18 },
+            { name: '力量', max: 20, value: 16 },
+            { name: '耐力', max: 20, value: 16 },
+            { name: '敏捷', max: 20, value: 20 }
+          ],
       }
   },
-  methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+  computed : {
+    scoreRadar () {
+      return {
+        title: {
+          text: '能力雷达图'
+        },
+        tooltip: {},
+        radar: {
+          indicator: this.scores.map(({ name, max }) => {
+            return { name, max }
+          })
+        },
+        series: [
+          {
+            name: '能力值',
+            type: 'radar',
+            data: [{ value: this.scores.map(({ value }) => value) }]
+          }
+        ]
       }
+    }
+  },
+  methods: {
+    refresh () {
+      // simulating async data from server
+      this.seconds = 3
+      let bar = this.$refs.bar
+      bar.showLoading({
+        text: 'Loading…',
+        color: '#4ea397',
+        maskColor: 'rgba(255, 255, 255, 0.4)'
+      })
+      let timer = setInterval(() => {
+        this.seconds--
+        if (this.seconds === 0) {
+          clearTimeout(timer)
+          bar.hideLoading()
+          this.bar = getBar()
+        }
+      }, 1000)
+    },
+    next() {
+            if (this.active++ > 2) this.active = 0;
+          },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    }
   },
 }
 </script>
 
 <style>
-.el-header, .el-footer {
+figure {
+  display: inline-block;
+  position :relative;
+  margin: 2em auto;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-radius: 8px;
+  box-shadow: 0 0 45px rgba(0, 0, 0, .2);
+  padding: 1.5em 2em;
+  min-width: calc(40vw + 4em);
+}
+
+.echarts {
+  min-width: 400px;
+  height: 300px;
+}
+.mainBox {
+  background-color: none;
+}
+.contentBox {
+  display: inline-block;
+  margin-top: 40px;
+  width: 70%;
+}
+.sideBox {
+  margin-left: 20px;
+  margin-top: 40px;
+  width: 70%;
+}
+.otherBox {
+  margin-top: 40px;
+}
+.el-header {
 background-color: #474a57;
 color: #B3C0D1;
 text-align: left;
@@ -76,25 +338,5 @@ color: #D3DCE6;
 text-align: center;
 line-height: 700px;
 }
-
-body > .el-container {
-margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-line-height: 320px;
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
+
