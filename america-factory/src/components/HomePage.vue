@@ -34,50 +34,38 @@
   <el-container class="mainBox">
     <el-header>Dashboard</el-header>
     <el-container class="contentBox" v-if="ManuView">
-      <el-steps :active="2" align-center>
-        <el-step title="Step 1" description="Some description"></el-step>
-        <el-step title="Step 2" description="Some description"></el-step>
-        <el-step title="Step 3" description="Some description"></el-step>
-        <el-step title="Step 4" description="Some description"></el-step>
+      <el-steps :active="active" align-center class="topBox">
+        <el-step title="Step 1" description="Washing"></el-step>
+        <el-step title="Step 2" description="Merge"></el-step>
+        <el-step title="Step 3" description="Heating"></el-step>
+        <el-step title="Step 4" description="Steam Pressure"></el-step>
       </el-steps>
-      <el-timeline>
-        <el-timeline-item timestamp="2018/4/12" placement="top">
-          <el-card>
-            <h4>Update Github template</h4>
-            <p>Tom committed 2018/4/12 20:46</p>
-          </el-card>
-        </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/3" placement="top">
-          <el-card>
-            <h4>Update Github template</h4>
-            <p>Tom committed 2018/4/3 20:46</p>
-          </el-card>
-        </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
-          <el-card>
-            <h4>Update Github template</h4>
-            <p>Tom committed 2018/4/2 20:46</p>
-          </el-card>
-        </el-timeline-item>
-      </el-timeline>
+      <el-button @click="next"> Go </el-button>
     </el-container>
     <el-container class="sideBox" v-if="InsuView">
       <el-timeline class="block">
         <el-timeline-item timestamp="2018/4/12" placement="top">
           <el-card>
-            <h4>Update Github template</h4>
-            <p>Tom committed 2018/4/12 20:46</p>
+            <h4>Process Update: "Steam Pressure"</h4>
+            <p> * Tom Get Injured *</p>
+            <p>Sean committed 2018/4/12 20:46</p>
           </el-card>
         </el-timeline-item>
         <el-timeline-item timestamp="2018/4/3" placement="top">
           <el-card>
-            <h4>Update Github template</h4>
+            <h4>Process Update: "Heating"</h4>
             <p>Tom committed 2018/4/3 20:46</p>
           </el-card>
         </el-timeline-item>
         <el-timeline-item timestamp="2018/4/2" placement="top">
           <el-card>
-            <h4>Update Github template</h4>
+            <h4>Process Update: "Merge"</h4>
+            <p>Tom committed 2018/4/2 20:46</p>
+          </el-card>
+        </el-timeline-item>
+         <el-timeline-item timestamp="2018/4/1" placement="top">
+          <el-card>
+            <h4>Process Update: "Washing"</h4>
             <p>Tom committed 2018/4/2 20:46</p>
           </el-card>
         </el-timeline-item>
@@ -85,19 +73,26 @@
       <el-timeline class="block">
         <el-timeline-item timestamp="2018/4/12" placement="top">
           <el-card>
-            <h4>Update Github template</h4>
-            <p>Tom committed 2018/4/12 20:46</p>
+            <h4>Process Update: "Steam Pressure"</h4>
+            <p> * Tom Get Injured *</p>
+            <p>Sean committed 2018/4/12 20:46</p>
           </el-card>
         </el-timeline-item>
         <el-timeline-item timestamp="2018/4/3" placement="top">
           <el-card>
-            <h4>Update Github template</h4>
+            <h4>Process Update: "Heating"</h4>
             <p>Tom committed 2018/4/3 20:46</p>
           </el-card>
         </el-timeline-item>
         <el-timeline-item timestamp="2018/4/2" placement="top">
           <el-card>
-            <h4>Update Github template</h4>
+            <h4>Process Update: "Merge"</h4>
+            <p>Tom committed 2018/4/2 20:46</p>
+          </el-card>
+        </el-timeline-item>
+         <el-timeline-item timestamp="2018/4/1" placement="top">
+          <el-card>
+            <h4>Process Update: "Washing"</h4>
             <p>Tom committed 2018/4/2 20:46</p>
           </el-card>
         </el-timeline-item>
@@ -129,6 +124,32 @@
   </el-container>
     <el-container>
     <el-header></el-header>
+    <el-timeline v-if="ManuView" class="topBox">
+        <el-timeline-item timestamp="2018/4/12" placement="top">
+          <el-card>
+            <h4>Process Update: "Steam Pressure"</h4>
+            <p>Tom committed 2018/4/12 20:46</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/3" placement="top">
+          <el-card>
+            <h4>Process Update: "Heating"</h4>
+            <p>Tom committed 2018/4/3 20:46</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/2" placement="top">
+          <el-card>
+            <h4>Process Update: "Merge"</h4>
+            <p>Tom committed 2018/4/2 20:46</p>
+          </el-card>
+        </el-timeline-item>
+         <el-timeline-item timestamp="2018/4/1" placement="top">
+          <el-card>
+            <h4>Process Update: "Washing"</h4>
+            <p>Tom committed 2018/4/2 20:46</p>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
     <chart
           class="otherBox"
           v-if="ReguView"
@@ -214,6 +235,7 @@ export default {
         data.push([r, i])
     }
       return {
+          active:1,
           pie,
           map,
           msg: 'hello',
@@ -255,6 +277,9 @@ export default {
     }
   },
   methods: {
+    next() {
+        if (this.active++ > 4) this.active = 1;
+    },
     refresh () {
       // simulating async data from server
       this.seconds = 3
@@ -297,7 +322,9 @@ figure {
   padding: 1.5em 2em;
   min-width: calc(40vw + 4em);
 }
-
+.topBox {
+  margin-top: 40px;
+}
 .echarts {
   min-width: 400px;
   height: 300px;
