@@ -73,34 +73,35 @@
       <el-timeline class="block">
         <el-timeline-item timestamp="2018/4/12" placement="top">
           <el-card>
-            <h4>Process Update: "Steam Pressure"</h4>
+            <h4>Block Update: "Injured Commit."</h4>
+            <p> Payment Process Start</p>
             <p> * Tom Get Injured *</p>
             <p>Sean committed 2018/4/12 20:46</p>
           </el-card>
         </el-timeline-item>
         <el-timeline-item timestamp="2018/4/3" placement="top">
           <el-card>
-            <h4>Process Update: "Heating"</h4>
+            <h4>Block Update: "Heating Done"</h4>
             <p>Tom committed 2018/4/3 20:46</p>
           </el-card>
         </el-timeline-item>
         <el-timeline-item timestamp="2018/4/2" placement="top">
           <el-card>
-            <h4>Process Update: "Merge"</h4>
+            <h4>Block Update: "Merge Done"</h4>
             <p>Tom committed 2018/4/2 20:46</p>
           </el-card>
         </el-timeline-item>
          <el-timeline-item timestamp="2018/4/1" placement="top">
           <el-card>
-            <h4>Process Update: "Washing"</h4>
+            <h4>Block Update: "Washing Done"</h4>
             <p>Tom committed 2018/4/2 20:46</p>
           </el-card>
         </el-timeline-item>
       </el-timeline>
     </el-container>
     <el-container class="sideBox" v-if="ReguView">
-      <digi-block class="block" percent="75%"/>
-      <digi-block class="block" percent="50%"/>
+      <digi-block class="block" title="Perform." percent="95%"/>
+      <digi-block class="block" title="Quality." percent="84%"/>
     </el-container>
     <chart
           v-if="ReguView"
@@ -150,7 +151,7 @@
           </el-card>
         </el-timeline-item>
       </el-timeline>
-    <chart
+      <chart
           class="otherBox"
           v-if="ReguView"
           :options="pie"
@@ -169,8 +170,8 @@
             :init-options="initOptions"
             autoresize
           />
-      <digi-block class="block" percent="75%" v-if="ReguView"/>
-      <digi-block class="block" percent="50%" v-if="ReguView"/>
+      <digi-block class="block" title="Efficiency." percent="75%" v-if="ReguView"/>
+      <digi-block class="block" title="Quantity." percent="50%" v-if="ReguView"/>
     </el-container>
 </el-container>
 </template>
@@ -326,8 +327,8 @@ figure {
   margin-top: 40px;
 }
 .echarts {
-  min-width: 400px;
-  height: 300px;
+  width: 1000px;
+  height: 500px;
 }
 .mainBox {
   background-color: none;

@@ -1,8 +1,8 @@
 <template>
     <el-container class="box">
 <el-row :gutter="20">
-  <el-col :span="16"><div class="grid-content bg-purple largeFont">Time (Aval.)</div></el-col>
-  <el-col :span="8"><div class="grid-content bg-purple midFont floatBox2">last week</div></el-col>
+  <el-col :span="16"><div class="grid-content bg-purple largeFont">{{title}}</div></el-col>
+  <el-col :span="8"><div class="grid-content bg-purple midFont floatBox2 certainBox">last week</div></el-col>
   <el-col :span="4"><div class="grid-content bg-purple">year-on-year ratio <i class="el-icon-caret-top">0.00%</i></div></el-col>
 </el-row>
 <el-row :gutter="20">
@@ -23,6 +23,7 @@ export default {
   name: 'DigiBlock',
   props: {
     percent: "",
+    title:"",
   },
   data() {
     return {
@@ -75,6 +76,9 @@ export default {
   .floatBox2 {
     text-align: right;
     margin-top: 30px;
+  }
+  .certainBox {
+    float:right;
   }
 </style>
 
